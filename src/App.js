@@ -12,16 +12,31 @@ function App() {
   const [news,setNews] = useState([])
   const [currentNewsId,setCurrentNewsId] = useState()
   
-  useEffect(() => {
-    axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${process.env.REACT_APP_API_KEY}`).then(res=>{
-    res.data.articles.forEach((item,index)=>{
-        item.id= index+1;
-    })
-    setNews(res.data.articles)
- }
-    ).catch(error=>{
-      console.log(error);
-    })
+  // using .env file---  REACT_APP_API_KEY=d2cc564295df4e34b3289447b2a7b928
+  
+//   useEffect(() => {
+//     axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${process.env.REACT_APP_API_KEY}`).then(res=>{
+//     res.data.articles.forEach((item,index)=>{
+//         item.id= index+1;
+//     })
+//     setNews(res.data.articles)
+//  }
+//     ).catch(error=>{
+//       console.log(error);
+//     })
+// }, [])
+
+// without using .env file
+useEffect(() => {
+  axios.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=d2cc564295df4e34b3289447b2a7b928").then(res=>{
+  res.data.articles.forEach((item,index)=>{
+      item.id= index+1;
+  })
+  setNews(res.data.articles)
+}
+  ).catch(error=>{
+    console.log(error);
+  })
 }, [])
 
   return (
